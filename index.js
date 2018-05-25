@@ -1,19 +1,9 @@
-http = require('http');
-server = http.createServer( function(req, res) {
+const express = require('express')
 
-    console.dir(req.param);
+const app = express()
 
-    if (req.method == 'POST') {
-        console.log("POST");
-        res.end();
-    }
-    else if (req.method == 'GET'){
-        console.log("GET");
-        res.end();
-    }
+app.get('/', (req, res) => console.log(req))
 
-});
+const PORT = process.env.PORT || 5000
 
-port = Number(process.env.PORT || 5000);
-server.listen(port);
-console.log('Listening at http://' + host + ':' + port);
+app.listen(PORT, () => console.log('Example app listening on port ' + PORT))
