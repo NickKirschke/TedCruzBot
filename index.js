@@ -6,6 +6,10 @@ app.get('/', function(req, res) {
   res.send('Hey this is Ted Cruz');
 });
 
+app.post('/',function(req, res){
+  console.log(req);
+});
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, function() {
