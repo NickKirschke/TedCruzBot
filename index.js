@@ -7,7 +7,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/',function(req, res){
-  console.log(req);
+  console.log(JSON.parse(req.chunks[0]));
 });
 
 const PORT = process.env.PORT || 5000
