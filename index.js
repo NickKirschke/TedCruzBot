@@ -22,9 +22,10 @@ server = http.createServer(function (req, res) {
 
 function parseBody() {
   var message = JSON.parse(body[body.length - 1]).text.toString();
+  var sender = JSON.parse(body[body.length - 1]).name.toString();
   if (message.toLowerCase().indexOf(botName) !== -1){
     console.log(botName + " was mentioned");
-    bot.determineResponse(message);
+    bot.determineResponse(message,sender);
   }
   else{
     console.log(botName + " was not mentioned");

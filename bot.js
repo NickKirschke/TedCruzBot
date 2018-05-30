@@ -18,7 +18,7 @@ bio          = "Born on December 22, 1970, I grew up in Houston, Texas, earning 
 "the 2016 Republican presidential nomination."
 
 
-function determineResponse(message) {
+function determineResponse(message,sender) {
   if (includes(message,"who made you") || includes(message,"creator")){
     coolText.createCoolText("Alec");
   }
@@ -41,6 +41,9 @@ function determineResponse(message) {
   else if (includes(message, "who are you")){
     sendMessage(bio,"");
   }
+  else if (includes(message,"who am i")){
+    sendMessage("You are " + sender + " idiot");
+  }
   else if (includes(message, "google search")){
     var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","").replace("search","");
     google.getSearchResults(cleanMessage);
@@ -55,7 +58,7 @@ function determineResponse(message) {
       sendMessage("yo");
     }
     else{
-      sendMessage("Not gonna lie, have no clue what to say to you right now. Sry","");
+      sendMessage("Not gonna lie, have no clue what to say to you right now. Sry " + sender,"");
     }
   }
 }
