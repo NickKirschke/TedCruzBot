@@ -1,17 +1,35 @@
-const express = require('express');
+var http, router, director, server, port, body, bot, botID;
 
-const app = express();
+request     = require('request');
+http        = require('http');
+director    = require('director');
+body        = [];
+bot         = require('./bot.js');
+botName     = "ted cruz";
 
-app.get('/', function(req, res) {
-  res.send('Hey this is Ted Cruz');
+router = new director.http.Router({
+  '/' : {
+    post: parseBody
+  }
 });
 
-app.post('/',function(req, res){
-  console.log(JSON.parse(req.chunks[0]));
+server = http.createServer(function (req, res) {
+  req.on('data', function (chunk) {
+    body.push(chunk.toString());
+    parseBody();
+  });
 });
 
-const PORT = process.env.PORT || 5000
+function parseBody() {
+  var message = JSON.parse(body[body.length - 1]).text.toString();
+  if (message.toLowerCase().indexOf(botName) !== -1){
+    console.log(botName + " was mentioned");
+    bot.determineResponse(message);
+  }
+  else{
+    console.log(botName + " was not mentioned");
+  }
+}
 
-app.listen(PORT, function() {
-  console.log('Example app listening on port ' + PORT)
-});
+port = Number(process.env.PORT || 5000);
+server.listen(port);
