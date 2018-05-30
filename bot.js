@@ -1,10 +1,11 @@
-var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText
+var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email
 
 request      = require('request');
 oneLinerJoke = require('one-liner-joke');
 pictures     = require('./pictures.js');
 google       = require('./google.js');
 coolText     = require('./cool-text.js');
+email        = require('./email.js');
 botID        = process.env.BOT_ID;
 topTiersUrl  = process.env.TOP_TIERS_URL;
 colinFellas  = "Hey fellas," + "\n" + "June 6th I start my new job with the Corporate side of Dominos Pizza. I'll " +
@@ -43,6 +44,9 @@ function determineResponse(message,sender) {
   }
   else if (includes(message,"who am i")){
     sendMessage("You are " + sender + " idiot");
+  }
+  else if (includes(message,"learn")){
+    email.sendEmail(message);
   }
   else if (includes(message, "google search")){
     var cleanMessage = "";
