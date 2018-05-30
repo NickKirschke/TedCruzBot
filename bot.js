@@ -80,7 +80,7 @@ function determineResponse(message,sender) {
       sendMessage("yo");
     }
     else{
-      sendMessage("Not gonna lie, have no clue what to say to you right now. Sry " + sender,"");
+      sendMessage("Not gonna lie, have no clue what to say to you right now. Sry.","");
     }
   }
 }
