@@ -5,7 +5,7 @@ http        = require('http');
 director    = require('director');
 body        = [];
 bot         = require('./bot.js');
-botName     = "ted cruz";
+botName     = "ted";
 
 router = new director.http.Router({
   '/' : {
