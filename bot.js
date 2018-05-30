@@ -45,15 +45,33 @@ function determineResponse(message,sender) {
     sendMessage("You are " + sender + " idiot");
   }
   else if (includes(message, "google search")){
-    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","").replace("search","");
+    var cleanMessage = "";
+    if (includes(message,"cruz")){
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","").replace("search","");
+    }
+    else{
+      cleanMessage = message.toLowerCase().replace("ted","").replace("google","").replace("search","");
+    }
     google.getSearchResults(cleanMessage);
   }
   else if (includes(message, "cool text")){
-    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("cool","").replace("text","");
+    var cleanMessage = "";
+    if (includes(message,"cruz")){
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("cool","").replace("text","");
+    }
+    else{
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cool","").replace("text","");
+    }
     coolText.createCoolText(cleanMessage.trim());
   }
   else{
-    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","");
+    var cleanMessage = "";
+    if (includes(message,"cruz")){
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","");
+    }
+    else{
+      cleanMessage = message.toLowerCase().replace("ted","");
+    }
     if (cleanMessage.trim() == "hey"){
       sendMessage("yo");
     }
