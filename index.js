@@ -25,7 +25,13 @@ function parseBody() {
   var sender = JSON.parse(body[body.length - 1]).name.toString();
   if (message.toLowerCase().indexOf(botName) !== -1){
     console.log(botName + " was mentioned");
-    bot.determineResponse(message,sender);
+    console.log(sender.toLowerCase());
+    if (sender.toLowerCase() != "ted cruz"){
+      bot.determineResponse(message,sender);
+    }
+    else{
+      console.log("Sender is Ted Cruz");
+    }
   }
   else{
     console.log(botName + " was not mentioned");
