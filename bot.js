@@ -33,6 +33,9 @@ function determineResponse(message,sender) {
   else if (includes(message, "meme")){
     pictures.getMeme();
   }
+  else if (includes(message, "gif")){
+    pictures.getGif();
+  }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
   }

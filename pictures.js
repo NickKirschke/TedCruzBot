@@ -1,4 +1,4 @@
-var fs, imageDownload, imageType, randomPuppy, randomString, puppyFileName, ImageService, topTiersUrl, bot, dankmemes
+var fs, imageDownload, imageType, randomPuppy, randomString, puppyFileName, ImageService, topTiersUrl, bot, dankmemes, GiphyRandom, giphyRandom
 
 fs = require('fs');
 imageDownload  = require('image-download');
@@ -7,6 +7,8 @@ randomPuppy    = require('random-puppy');
 randomString   = require("randomstring");
 ImageService   = require('groupme').ImageService;
 dankmemes      = require('dankmemes');
+GiphyRandom    = require('giphy-random');
+giphyRandom    = new GiphyRandom({ apiKey: process.env.API_KEY });
 bot            = require('./bot.js');
 topTiersUrl    = process.env.TOP_TIERS_URL;
 
@@ -32,28 +34,39 @@ function getMeme(){
   });
 }
 
+function getGif(){
+  giphyRandom.get({ rating: 'R' })
+    .then(data => bot.sendMessage(data.url,""))
+    .catch(e => console.error(e.message));
+}
+
 function downloadImage(url, typePic){
   imageDownload(url)
     .then(buffer => {
-      var type = imageType(buffer);
-      var fileName = randomString.generate() + "." + type.ext;
-      fs.writeFile(fileName, buffer, (err) => {
-        if (!err){
-          console.log("Wrote " + fileName + " successfully");
-          if (typePic == "puppy"){
-            postPictureToImageService(fileName,"puppy");
-          }
-          else if (typePic == "meme"){
-            postPictureToImageService(fileName,"meme");
+      if (buffer != null){
+        var type = imageType(buffer);
+        var fileName = randomString.generate() + "." + type.ext;
+        fs.writeFile(fileName, buffer, (err) => {
+          if (!err){
+            console.log("Wrote " + fileName + " successfully");
+            if (typePic == "puppy"){
+              postPictureToImageService(fileName,"puppy");
+            }
+            else if (typePic == "meme"){
+              postPictureToImageService(fileName,"meme");
+            }
+            else{
+              console.log("Type not specified");
+            }
           }
           else{
-            console.log("Type not specified");
+            console.log(err);
           }
-        }
-        else{
-          console.log(err);
-        }
-      });
+        });
+      }
+      else{
+        console.log("Error downloading image");
+      }
     })
 }
 
@@ -84,3 +97,4 @@ function postPictureToImageService(fileName,type){
 
 exports.getPuppyPicture = getPuppyPicture;
 exports.getMeme = getMeme;
+exports.getGif = getGif;
