@@ -16,6 +16,7 @@
     "image-download": "^1.1.0",
     "nodemailer": "^4.6.5",
     "one-liner-joke": "^1.0.0",
+    "poo": "^1.0.7",
     "random-puppy": "^1.1.0",
     "randomstring": "^1.1.5",
     "request": "^2.87.0"
