@@ -1,7 +1,8 @@
-var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email
+var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo
 
 request      = require('request');
 oneLinerJoke = require('one-liner-joke');
+poo          = require('poo');
 pictures     = require('./pictures.js');
 google       = require('./google.js');
 coolText     = require('./cool-text.js');
@@ -34,6 +35,9 @@ function determineResponse(message,sender) {
   }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
+  }
+  else if (includes(message, "poop fact") || includes(message,"poo fact")){
+    sendMessage(poo.fact(),"");
   }
   else if (includes(message, "joke")){
     var randomJoke = oneLinerJoke.getRandomJoke();

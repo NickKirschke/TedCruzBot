@@ -20,9 +20,9 @@ function getPuppyPicture(){
 }
 
 function getMeme(){
-  dankmemes('hour',10,function(error, data) {
+  dankmemes('hour',25,function(error, data) {
     if (!error){
-      var randomNum = Math.floor(Math.random() * 10) + 1
+      var randomNum = Math.floor(Math.random() * 25) + 1
       var url = data[randomNum.toString()];
       downloadImage(url, "meme");
     }
