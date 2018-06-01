@@ -1,4 +1,4 @@
-var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo
+var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo, randomResponses
 
 request      = require('request');
 oneLinerJoke = require('one-liner-joke');
@@ -18,6 +18,8 @@ bio          = "Born on December 22, 1970, I grew up in Houston, Texas, earning 
 "presidential campaign of George W. Bush. In 2012 I won election to the U.S. Senate with the support of the Tea Party and took office the" +
 "following year, going on to orchestrate a governmental shutdown in opposition to Obamacare. In 2015, I announced that I was running for"  +
 "the 2016 Republican presidential nomination."
+randomResponses    = ["Not gonna lie, have no clue what to say to you right now. Sry.","Can't talk right now, too busy getin money","lol","Idk what to say so haha",
+"Why don't you try googling it","I'm Ted Cruz and I approve that message","Yeah you and what army","Warriors in 5","Shhhhhh","I don't care","ok"];
 
 
 function determineResponse(message,sender) {
@@ -42,12 +44,18 @@ function determineResponse(message,sender) {
   else if (includes(message, "bryan")){
     sendMessage("Bryan is a rapist","");
   }
+  else if (includes(message,"s up")){
+    sendMessage("nm wbu","");
+  }
   else if (includes(message,"roll dice")){
     var randomNum = Math.floor(Math.random() * 6) + 1
     sendMessage(randomNum.toString() + " is your number","");
   }
   else if (includes(message, "poop fact") || includes(message,"poo fact")){
     sendMessage(poo.fact(),"");
+  }
+  else if (includes(message,"love")){
+    sendMessage("i love u 2....sike","");
   }
   else if (includes(message, "joke")){
     var randomJoke = oneLinerJoke.getRandomJoke();
@@ -62,13 +70,21 @@ function determineResponse(message,sender) {
   else if (includes(message,"learn")){
     email.sendEmail(message);
   }
-  else if (includes(message, "google search")){
-    var cleanMessage = "";
-    if (includes(message,"cruz")){
-      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","").replace("search","");
+  else if (includes(message,"mom") || includes(message,"dad")){
+    if (includes(message,"mom")){
+      sendMessage("me and your mom are good friends :)","");
     }
     else{
-      cleanMessage = message.toLowerCase().replace("ted","").replace("google","").replace("search","");
+      sendMessage("I\'m your daddy","");
+    }
+  }
+  else if (includes(message, "google")){
+    var cleanMessage = "";
+    if (includes(message,"cruz")){
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","");
+    }
+    else{
+      cleanMessage = message.toLowerCase().replace("ted","").replace("google","");
     }
     google.getSearchResults(cleanMessage);
   }
@@ -82,6 +98,9 @@ function determineResponse(message,sender) {
     }
     coolText.createCoolText(cleanMessage.trim());
   }
+  else if (includes(message,"?")){
+    sendMessage("Why are you asking me that","");
+  }
   else{
     var cleanMessage = "";
     if (includes(message,"cruz")){
@@ -90,11 +109,20 @@ function determineResponse(message,sender) {
     else{
       cleanMessage = message.toLowerCase().replace("ted","");
     }
-    if (cleanMessage.trim() == "hey"){
+    if (cleanMessage.trim() == "hey" || cleanMessage.trim() == "hi" || cleanMessage.trim() == "yo"){
       sendMessage("yo");
     }
     else{
-      sendMessage("Not gonna lie, have no clue what to say to you right now. Sry.","");
+      var randomNum = Math.floor(Math.random() * randomResponses.length + 2);
+      if (randomNum == randomResponses.length + 1){
+        sendMessage(colinFellas,"");
+      }
+      else if (randomNum == randomResponses.length + 2){
+        pictures.getPuppyPicture();
+      }
+      else{
+        sendMessage(randomResponses[randomNum],"");
+      }
     }
   }
 }
