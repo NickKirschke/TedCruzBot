@@ -7,6 +7,7 @@ pictures     = require('./pictures.js');
 google       = require('./google.js');
 coolText     = require('./cool-text.js');
 email        = require('./email.js');
+groupmecli   = require('./groupmecli.js');
 botID        = process.env.BOT_ID;
 topTiersUrl  = process.env.TOP_TIERS_URL;
 colinFellas  = "Hey fellas," + "\n" + "June 6th I start my new job with the Corporate side of Dominos Pizza. I'll " +
@@ -22,7 +23,7 @@ randomResponses    = ["Not gonna lie, have no clue what to say to you right now.
 "Why don't you try googling it","I'm Ted Cruz and I approve that message","Yeah you and what army","Warriors in 5","Shhhhhh","I don't care","ok"];
 
 
-function determineResponse(message,sender) {
+function determineResponse(message,sender,messageId) {
   if (includes(message,"who made you") || includes(message,"creator")){
     coolText.createCoolText("Alec");
   }
@@ -69,6 +70,12 @@ function determineResponse(message,sender) {
   }
   else if (includes(message,"learn")){
     email.sendEmail(message);
+  }
+  else if (includes(message,"dislike")){
+    groupmecli.likeMessages(messageId,"dislike");
+  }
+  else if (includes(message,"like")){
+    groupmecli.likeMessages(messageId,"like");
   }
   else if (includes(message,"mom") || includes(message,"dad")){
     if (includes(message,"mom")){

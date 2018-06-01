@@ -23,13 +23,14 @@ server = http.createServer(function (req, res) {
 function parseBody() {
   var message = JSON.parse(body[body.length - 1]).text.toString();
   var sender = JSON.parse(body[body.length - 1]).name.toString();
+  var messageId = JSON.parse(body[body.length - 1]).id;
   if (message.toLowerCase().indexOf(botName) !== -1){
     console.log(botName + " was mentioned");
     if (sender.toLowerCase() != "ted cruz"){
       if (bot.includes(sender.toLowerCase(),"bryan")){
         sender = "Uncle B";
       }
-      bot.determineResponse(message,sender);
+      bot.determineResponse(message,sender,messageId);
     }
     else{
       console.log("Sender is Ted Cruz");
