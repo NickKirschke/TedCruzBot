@@ -157,6 +157,7 @@ function sendMessage(message,pictureUrl) {
     body: JSON.stringify(body)
   }, function(error, response, body){
     if (!error){
+      console.log(message);
       console.log("Message was sent successfully");
     }
     else{
