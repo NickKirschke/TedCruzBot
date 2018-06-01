@@ -39,6 +39,13 @@ function determineResponse(message,sender) {
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
   }
+  else if (includes(message, "bryan")){
+    sendMessage("Bryan is a rapist","");
+  }
+  else if (includes(message,"roll dice")){
+    var randomNum = Math.floor(Math.random() * 6) + 1
+    sendMessage(randomNum.toString() + " is your number","");
+  }
   else if (includes(message, "poop fact") || includes(message,"poo fact")){
     sendMessage(poo.fact(),"");
   }
