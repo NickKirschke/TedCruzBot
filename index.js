@@ -27,6 +27,9 @@ function parseBody() {
     console.log(botName + " was mentioned");
     console.log(sender.toLowerCase());
     if (sender.toLowerCase() != "ted cruz"){
+      if (bot.includes(sender.toLowerCase(),"bryan")){
+        sender = "Uncle B";
+      }
       bot.determineResponse(message,sender);
     }
     else{

@@ -114,7 +114,10 @@ function determineResponse(message,sender) {
     }
     else{
       var randomNum = Math.floor(Math.random() * randomResponses.length + 2);
-      if (randomNum == randomResponses.length + 1){
+      if (sender == "Uncle B"){
+        sendMessage("idk but you\'re Uncle B");
+      }
+      else if (randomNum == randomResponses.length + 1){
         sendMessage(colinFellas,"");
       }
       else if (randomNum == randomResponses.length + 2){
@@ -169,3 +172,4 @@ function includes(theString,substring){
 
 exports.determineResponse = determineResponse;
 exports.sendMessage = sendMessage;
+exports.includes = includes;
