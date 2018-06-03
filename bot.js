@@ -74,10 +74,10 @@ function determineResponse(message,sender,messageId) {
   else if (includes(message,"say")){
     var cleanMessage = ""
     if (includes(message,"cruz")){
-      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","tell");
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("say","");
     }
     else{
-      cleanMessage = message.toLowerCase().replace("ted","").replace("tell","");
+      cleanMessage = message.toLowerCase().replace("ted","").replace("say","");
     }
     sendMessage(cleanMessage,"");
   }
