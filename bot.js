@@ -71,6 +71,16 @@ function determineResponse(message,sender,messageId) {
   else if (includes(message,"learn")){
     email.sendEmail(message);
   }
+  else if (includes(message,"say")){
+    var cleanMessage = ""
+    if (includes(message,"cruz")){
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","tell");
+    }
+    else{
+      cleanMessage = message.toLowerCase().replace("ted","").replace("tell","");
+    }
+    sendMessage(cleanMessage,"");
+  }
   else if (includes(message,"dislike")){
     groupmecli.likeMessages(messageId,"dislike");
   }
