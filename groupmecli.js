@@ -14,7 +14,7 @@ function likeMessages(messageId,type){
   }, function(error, res){
     if (!error){
       jsonRes = JSON.parse(res.body);
-      for (i = 0; i < 11; i++){
+      for (i = 0; i < 19; i++){
         messageId = jsonRes.response.messages[i].id;
         if (type == "like"){
           API.Likes.create(accessToken, groupID, messageId, function(error, res) {
