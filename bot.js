@@ -8,6 +8,7 @@ google       = require('./google.js');
 coolText     = require('./cool-text.js');
 email        = require('./email.js');
 groupmecli   = require('./groupmecli.js');
+youtube      = require('./youtube.js');
 botID        = process.env.BOT_ID;
 topTiersUrl  = process.env.TOP_TIERS_URL;
 colinFellas  = "Hey fellas," + "\n" + "June 6th I start my new job with the Corporate side of Dominos Pizza. I'll " +
@@ -38,6 +39,10 @@ function determineResponse(message,sender,messageId) {
   }
   else if (includes(message, "gif")){
     pictures.getGif();
+  }
+  else if (includes(message,"youtube")){
+    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("youtube","");
+    youtube.searchYoutube(cleanMessage.trim());
   }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
@@ -74,7 +79,7 @@ function determineResponse(message,sender,messageId) {
   else if (includes(message,"say")){
     var cleanMessage = ""
     if (includes(message,"cruz")){
-      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("say","");
+      cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("google","say");
     }
     else{
       cleanMessage = message.toLowerCase().replace("ted","").replace("say","");
@@ -174,7 +179,6 @@ function sendMessage(message,pictureUrl) {
     body: JSON.stringify(body)
   }, function(error, response, body){
     if (!error){
-      console.log(message);
       console.log("Message was sent successfully");
     }
     else{
