@@ -1,4 +1,4 @@
-var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo, randomResponses
+var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo, randomResponses, commands
 
 request      = require('request');
 oneLinerJoke = require('one-liner-joke');
@@ -22,6 +22,8 @@ bio          = "Born on December 22, 1970, I grew up in Houston, Texas, earning 
 "the 2016 Republican presidential nomination."
 randomResponses    = ["Not gonna lie, have no clue what to say to you right now. Sry.","Can't talk right now, too busy getin money","lol","Idk what to say so haha",
 "Why don't you try googling it","I'm Ted Cruz and I approve that message","Yeah you and what army","Warriors in 5","Shhhhhh","I don't care","ok"];
+commands = "Here are the following commands you can use with me: \n top tiers \n puppy pic \n meme \n gif \n youtube \n" +
+"dominos \n roll dice \n poo fact \n joke \n who are/made you \n who am i \n learn \n say \n like & dislike \n google \n cool text \n and other hidden commands";
 
 
 function determineResponse(message,sender,messageId) {
@@ -91,6 +93,9 @@ function determineResponse(message,sender,messageId) {
   }
   else if (includes(message,"like")){
     groupmecli.likeMessages(messageId,"like");
+  }
+  else if (includes(message, "commands")){
+    sendMessage(commands,"");
   }
   else if (includes(message,"mom") || includes(message,"dad")){
     if (includes(message,"mom")){
