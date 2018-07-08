@@ -48,18 +48,26 @@ function getBirthday(name){
   gis(name + ' happy birthday', birthdayResult);
 }
 
+function getImage(query){
+  gis(query, function (error, res){
+    if (!error){
+      downloadImage(res[0].url,"image",query);
+    }
+  });
+}
+
 function birthdayResult(error, results){
   if (error){
     console.log(error);
   }
   else{
-    for (i = 0; i <= 8; i++){
-      downloadImage(results[i].url,"image");
+    for (i = 0; i <= 4; i++){
+      downloadImage(results[i].url,"birthday");
     }
   }
 }
 
-function downloadImage(url, typePic){
+function downloadImage(url, typePic,query){
   imageDownload(url)
     .then(buffer => {
       if (buffer != null){
@@ -74,8 +82,11 @@ function downloadImage(url, typePic){
             else if (typePic == "meme"){
               postPictureToImageService(fileName,"meme");
             }
-            else if (typePic == "image"){
-              postPictureToImageService(fileName,"image");
+            else if (typePic == "birthday"){
+              postPictureToImageService(fileName,"birthday");
+            }
+            else if(typePic == "image"){
+              postPictureToImageService(fileName,"image",query);
             }
             else{
               console.log("Type not specified");
@@ -92,7 +103,7 @@ function downloadImage(url, typePic){
     })
 }
 
-function postPictureToImageService(fileName,type){
+function postPictureToImageService(fileName,type,query){
   ImageService.post(fileName,function(error, res){
     if (!error){
       if (fileName != topTiersUrl){
@@ -107,8 +118,11 @@ function postPictureToImageService(fileName,type){
       else if (type == "meme"){
         bot.sendMessage("Here's a random meme",res.picture_url);
       }
-      else if(type == "image"){
+      else if(type == "birthday"){
         bot.sendMessage("", res.picture_url);
+      }
+      else if (type == "image"){
+        bot.sendMessage("Top Result for " + query,res.picture_url);
       }
       else{
         console.log("Type not specified");
@@ -124,3 +138,4 @@ exports.getPuppyPicture = getPuppyPicture;
 exports.getMeme = getMeme;
 exports.getGif = getGif;
 exports.getBirthday = getBirthday;
+exports.getImage = getImage;

@@ -61,6 +61,10 @@ function determineResponse(message,sender,messageId) {
       }
     }
   }
+  else if (includes(message, "searchpics")){
+    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("searchpics","");
+    pictures.getImage(cleanMessage.trim());
+  }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
   }
