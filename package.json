@@ -12,6 +12,8 @@
     "dankmemes": "^1.0.0",
     "director": "",
     "figlet": "^1.2.0",
+    "free-google-image-search": "^1.0.0",
+    "g-i-s": "^2.1.2",
     "giphy-random": "^1.0.5",
     "google": "^2.1.0",
     "groupme": "^0.5.7",

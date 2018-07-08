@@ -46,6 +46,21 @@ function determineResponse(message,sender,messageId) {
     var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("youtube","");
     youtube.searchYoutube(cleanMessage.trim());
   }
+  else if (includes(message, "happy birthday")){
+    var splitMessage = message.split(" ");
+    for (i = 0; i < splitMessage.length; i++){
+      if (splitMessage[i] == "happy"){
+        var name = "";
+        if (i != 0){
+          name = splitMessage[i - 1];
+        }
+        else{
+          name = splitMessage[i + 2];
+        }
+        pictures.getBirthday(name);
+      }
+    }
+  }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
   }
