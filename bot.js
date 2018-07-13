@@ -30,6 +30,10 @@ function determineResponse(message,sender,messageId) {
   if (includes(message,"who made you") || includes(message,"creator")){
     coolText.createCoolText("Alec");
   }
+  else if (includes(message, "searchpics")){
+    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("searchpics","");
+    pictures.getImage(cleanMessage.trim());
+  }
   else if (includes(message, "top tiers")){
     sendMessage("The fellas",topTiersUrl);
   }
@@ -60,10 +64,6 @@ function determineResponse(message,sender,messageId) {
         pictures.getBirthday(name);
       }
     }
-  }
-  else if (includes(message, "searchpics")){
-    var cleanMessage = message.toLowerCase().replace("ted","").replace("cruz","").replace("searchpics","");
-    pictures.getImage(cleanMessage.trim());
   }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
