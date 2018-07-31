@@ -21,7 +21,7 @@ bio          = "Born on December 22, 1970, I grew up in Houston, Texas, earning 
 "following year, going on to orchestrate a governmental shutdown in opposition to Obamacare. In 2015, I announced that I was running for"  +
 "the 2016 Republican presidential nomination."
 randomResponses    = ["Not gonna lie, have no clue what to say to you right now. Sry.","Can't talk right now, too busy getin money","lol","Idk what to say so haha",
-"Why don't you try googling it","I'm Ted Cruz and I approve that message","Yeah you and what army","Warriors in 5","Shhhhhh","I don't care","ok"];
+"Why don't you try googling it","I'm Ted Cruz and I approve that message","Yeah you and what army","Warriors in 5, nick sucks","Shhhhhh","I don't care","ok","suck it","ur mom","no"];
 commands = "Here are the following commands you can use with me: \n top tiers \n puppy pic \n meme \n gif \n youtube \n" +
 "dominos \n roll dice \n poo fact \n joke \n who are/made you \n who am i \n learn \n say \n like & dislike \n google \n cool text \n and other hidden commands";
 
@@ -159,15 +159,9 @@ function determineResponse(message,sender,messageId) {
       sendMessage("yo");
     }
     else{
-      var randomNum = Math.floor(Math.random() * randomResponses.length + 2);
+      var randomNum = Math.floor(Math.random() * randomResponses.length - 1);
       if (sender == "Uncle B"){
         sendMessage("idk but you\'re Uncle B");
-      }
-      else if (randomNum == randomResponses.length + 1){
-        sendMessage(colinFellas,"");
-      }
-      else if (randomNum == randomResponses.length + 2){
-        pictures.getPuppyPicture();
       }
       else{
         sendMessage(randomResponses[randomNum],"");
