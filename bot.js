@@ -85,6 +85,21 @@ function determineResponse(message,sender,messageId) {
   else if (includes(message,"love")){
     sendMessage("i love u 2....sike","");
   }
+  else if (includes(message, "roast")){
+    var splitMessage = message.split(" ");
+    for (i = 0; i < splitMessage.length; i++){
+      if (splitMessage[i] == "roast"){
+        var name = ""
+        if (splitMessage[i + 1] != null){
+            name = splitMessage[i + 1];
+        }
+        else{
+          name = sender
+        }
+        sendMessage(name + " is a " + curses() + " lol","")
+      }
+    }
+  }
   else if (includes(message, "joke")){
     var randomJoke = oneLinerJoke.getRandomJoke();
     sendMessage(randomJoke["body"],"");
