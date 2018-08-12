@@ -1,4 +1,4 @@
-ar request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo, randomResponses, commands,
+var request, botID, botResponse, topTiersUrl, pictures, colinFellas, oneLinerJoke, bio, coolText, email, poo, randomResponses, commands,
 curses
 
 request      = require('request');
