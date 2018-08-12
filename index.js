@@ -1,5 +1,6 @@
-var http, router, director, server, port, body, bot, botID;
+var http, router, director, server, port, body, bot, botID, Filter;
 
+Filter      = require('bad-words');
 request     = require('request');
 http        = require('http');
 director    = require('director');
@@ -24,6 +25,11 @@ function parseBody() {
   var message = JSON.parse(body[body.length - 1]).text.toString();
   var sender = JSON.parse(body[body.length - 1]).name.toString();
   var messageId = JSON.parse(body[body.length - 1]).id;
+  var customFilter = new Filter({ placeHolder: '*'});
+  var cleanMessage = customFilter.clean(message);
+  if (bot.includes(cleanMessage,"*") && sender.toLowerCase() != "ted cruz"){
+      bot.sendMessage(cleanMessage,"");
+  }
   if (message.toLowerCase().indexOf(botName) !== -1){
     console.log(botName + " was mentioned");
     if (sender.toLowerCase() != "ted cruz"){
@@ -37,6 +43,7 @@ function parseBody() {
     }
   }
   else{
+
     console.log(botName + " was not mentioned");
   }
 }
