@@ -66,6 +66,12 @@ function determineResponse(message,sender,messageId) {
       }
     }
   }
+  else if (includes(message, "arya")){
+    sendMessage("What a beast","");
+  }
+  else if (includes(message, "daniel")){
+    sendMessage("that kid STINKSSS","");
+  }
   else if (includes(message, "dominos")){
     sendMessage(colinFellas,"");
   }
