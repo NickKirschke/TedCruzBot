@@ -49,16 +49,22 @@ function getBirthday(name){
 }
 
 function getImage(query){
-  gis(query, function (error, res){
-    if (!error){
-      if (typeof res[0] !== undefined && res[0]){
-        downloadImage(res[0].url,"image",query);
+  try{
+    gis(query, function (error, res){
+      if (!error){
+        if (typeof res[0] !== undefined && res[0]){
+          downloadImage(res[0].url,"image",query);
+        }
+        else{
+          bot.sendMessage("can't find a picture of that, srry");
+        }
       }
-      else{
-        bot.sendMessage("can't find a picture of that, srry");
-      }
-    }
-  });
+    });
+  }
+  catch(error){
+    console.log(error);
+    bot.sendMessage("can't find a picture of that, srry");
+  }
 }
 
 function birthdayResult(error, results){
