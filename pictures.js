@@ -51,7 +51,12 @@ function getBirthday(name){
 function getImage(query){
   gis(query, function (error, res){
     if (!error){
-      downloadImage(res[0].url,"image",query);
+      if (res[0].url !== undefined){
+        downloadImage(res[0].url,"image",query);
+      }
+      else{
+        bot.sendMessage("can't find a picture of that, srry");
+      }
     }
   });
 }
