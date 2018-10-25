@@ -51,7 +51,7 @@ function getBirthday(name){
 function getImage(query){
   gis(query, function (error, res){
     if (!error){
-      if (res[0].url !== undefined){
+      if (typeof res[0] !== undefined && res[0]){
         downloadImage(res[0].url,"image",query);
       }
       else{
