@@ -73,39 +73,45 @@ function birthdayResult(error, results){
 }
 
 function downloadImage(url, typePic,query){
-  imageDownload(url)
-    .then(buffer => {
-      if (buffer != null){
-        var type = imageType(buffer);
-        var fileName = randomString.generate() + "." + type.ext;
-        fs.writeFile(fileName, buffer, (err) => {
-          if (!err){
-            console.log("Wrote " + fileName + " successfully");
-            if (typePic == "puppy"){
-              postPictureToImageService(fileName,"puppy");
-            }
-            else if (typePic == "meme"){
-              postPictureToImageService(fileName,"meme");
-            }
-            else if (typePic == "birthday"){
-              postPictureToImageService(fileName,"birthday");
-            }
-            else if(typePic == "image"){
-              postPictureToImageService(fileName,"image",query);
+  try{
+    imageDownload(url)
+      .then(buffer => {
+        if (buffer != null){
+          var type = imageType(buffer);
+          var fileName = randomString.generate() + "." + type.ext;
+          fs.writeFile(fileName, buffer, (err) => {
+            if (!err){
+              console.log("Wrote " + fileName + " successfully");
+              if (typePic == "puppy"){
+                postPictureToImageService(fileName,"puppy");
+              }
+              else if (typePic == "meme"){
+                postPictureToImageService(fileName,"meme");
+              }
+              else if (typePic == "birthday"){
+                postPictureToImageService(fileName,"birthday");
+              }
+              else if(typePic == "image"){
+                postPictureToImageService(fileName,"image",query);
+              }
+              else{
+                console.log("Type not specified");
+              }
             }
             else{
-              console.log("Type not specified");
+              console.log(err);
             }
-          }
-          else{
-            console.log(err);
-          }
-        });
-      }
-      else{
-        console.log("Error downloading image");
-      }
-    })
+          });
+        }
+        else{
+          console.log("Error downloading image");
+        }
+      })
+  }
+  catch(error){
+    console.log(error);
+    bot.sendMessage("can't find a picture of that, srry");
+  }
 }
 
 function postPictureToImageService(fileName,type,query){
